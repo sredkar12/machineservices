@@ -1,4 +1,4 @@
-For simplicity I have used a static list of devices which forms the existing devices . In actual scenario, I would have used a hibernate and JPA to connect to a say MySQL db . I would add the JPA deendency in spring boot .
+For simplicity I have used a static list of devices which forms the existing devices . In actual scenario, I would have used a hibernate and JPA to connect to a say MySQL db . I would add the JPA dependency in spring boot .
 
 I have created  the project using the spring boot initializer .  
 

@@ -2,7 +2,7 @@ For simplicity I have used a static list of devices which forms the existing dev
 
 I have created  the project using the spring boot initializer .  
 
-The @Pattern validation validates for both a new device ( all 3 fields ) and also indivual fields when a search is done by say - serialnumber or machinecode.
+The @Pattern validation validates for both a new device ( all 3 fields ) and also individual fields when a search is done by say - serialnumber or machinecode.
 
 
 I have written a Customized error handler for a customized error to be returned .

@@ -50,8 +50,18 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorrResponse errorResponse = null;
+
+        // look for the specific field from the bindingResult and construct the error response .
+       if (ex.getBindingResult().toString().contains("Pattern.device.machinecode"))
+            errorResponse = new ErrorrResponse("machine.code.invalid","ER001",
+                    "The machine code is incorrect. Check the Machine code you provided and try again");
+        if (ex.getBindingResult().toString().contains("Pattern.device.serialnumber"))
         errorResponse = new ErrorrResponse("serial.number.invalid","ER003",
-                ex.getBindingResult().toString());
+                "The serial number entered can include a - z, A - Z, 0 - 9 and hyphen. Please correct your entry.");
+        if (ex.getBindingResult().toString().contains("Pattern.device.devicename"))
+            errorResponse = new ErrorrResponse("devicename.invalid","ER005",
+                    "Device name invalid");
+
         return new ResponseEntity(errorResponse,HttpStatus.BAD_REQUEST);
     }
 

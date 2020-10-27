@@ -20,9 +20,9 @@ Following are the URI’S
 /allDevices.  – gets all devices
 
 /deviceBymachinecode/{machinecode}.  – gets a single device searched by machine code .
-Returns the device if success or returns the error in the format specified in the task .
+Returns the device if success or returns the error in the format specified in the requirements.
 
 /deviceByserialnumber/{serialnumber} -   – gets a single device searched by serial number .
-Returns the device if success or returns the error in the format specified in the task .
+Returns the device if success or returns the error in the format specified in the requirements .
 
 

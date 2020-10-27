@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @RestController
 public class DeviceController {
@@ -26,6 +27,8 @@ public class DeviceController {
 
     @GetMapping("/devicebySerialNum/{serialnumber}")
     public Device getDevicebySernum(@PathVariable String serialnumber) {
+        if(!Pattern.matches("^[0-9]{2}-[0-9]{4}$", serialnumber))
+            throw new DeviceException("Serial number invalid");
         Device device = deviceService.retrieveDevicebySerialNum(serialnumber);
         if ( device == null )
             throw new DeviceException("Serial number not found");
@@ -35,11 +38,9 @@ public class DeviceController {
 
     @GetMapping("/devicebyMachineCode/{machinecode}")
     public Device getDevicebyMachineCode(@PathVariable String machinecode) {
-        String errcode =  validateMachinecode(machinecode);
-        if (errcode != null)
-        {
-            throw new DeviceException(errcode);
-        }
+        if(!Pattern.matches("^[0-9]{7}-[0-9]{5}$", machinecode))
+            throw new DeviceException("Machine code invalid");
+
         Device device = deviceService.retrieveDevicebyMacineCode(machinecode);
         if ( device == null )
             throw new DeviceException("Machine code not found");
@@ -52,13 +53,7 @@ public class DeviceController {
     public ResponseEntity<Void> addNewDevice(
            @Valid @RequestBody Device newDevice) {
 
-            String errcode = validate(newDevice);
-        if (errcode != null)
-        {
-            System.out.println("throwing exception adddevice");
-            throw new DeviceException(errcode);
-        }
-        System.out.println("adding device");
+
         Device device = deviceService.addDevice( newDevice);
 
         if (device == null)
@@ -70,31 +65,8 @@ public class DeviceController {
         return ResponseEntity.created(location).build();
     }
 
-    private String validate(Device newDevice) {
-        System.out.println("Validating");
-
-
-        if ( newDevice.getSerialnumber().isEmpty() || newDevice.getSerialnumber().length() != 7) {
-            System.out.println("Validating error " + newDevice.getSerialnumber().length());
-            return ("Serial number invalid");
-        }
-        if ( newDevice.getMachinecode().isEmpty() || newDevice.getMachinecode().length() != 13) {
-            System.out.println("Validating error " + newDevice.getMachinecode().length());
-            return ("Machine code invalid");
-        }
-        else
-            return null;
-    }
-
-    private String validateMachinecode(String machinecode) {
-
-        if ( machinecode.isEmpty() || machinecode.length() != 13 )
-            return ("Machine code invalid");
-        else
-            return null;
-
-    }
 
 
 
 }
+

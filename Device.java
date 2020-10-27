@@ -8,19 +8,16 @@ import java.util.Objects;
 public class Device {
 
     Integer id;
-
-    @NotNull
     @Pattern(regexp=("^[0-9]{2}-[0-9]{4}$"))
     private String serialnumber;
 
-    @NotNull
+
     @Pattern(regexp=("^[0-9]{7}-[0-9]{5}$"))
     private String machinecode;
 
-    @NotNull
+
     @Pattern(regexp=("^[0-9]{1}-[0-9]{8}$"))
     private String devicename;
-
 
     // Needed by Caused by: com.fasterxml.jackson.databind.JsonMappingException:
     // Can not construct instance of com.in28minutes.springboot.model.Course:

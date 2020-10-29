@@ -1,6 +1,6 @@
 For simplicity I have used a static list of devices which forms the existing devices . In actual scenario, I would have used a hibernate and JPA to connect to a say MySQL db . I would add the JPA dependency in spring boot .
 
-I have created  the project using the spring boot initializer .  
+I have created  the project using the spring boot initializer with Web dependency as a starting point.
 
 The @Pattern validation validates for both a new device ( all 3 fields ) and also individual fields when a search is done by say - serialnumber or machinecode.
 
